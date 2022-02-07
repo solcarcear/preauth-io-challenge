@@ -66,23 +66,22 @@ export class GildedRose {
             }
             if (qualityResult > 50) {
                 item.quality = 50;
-            }             
+            }
+            return true;
         });
         return this.items;
     }
 
     private static getFactorDegree(item: ItemToSell) {
         let result = item.degreeIsPlus ? 1 : -1;
-        switch (item.name) {
-            case ItemToSell.itemBackstageName: {
-                if (item.sellIn < 11) {
-                    result++;
-                }
-                if (item.sellIn < 6) {
-                    result++;
-                }
-                break;
+        if (item.name === ItemToSell.itemBackstageName) {
+            if (item.sellIn < 11) {
+                result++;
             }
+            if (item.sellIn < 6) {
+                result++;
+            }
+
         }
         if (item.expired) {
             GildedRose.degreeTwice(result);
