@@ -9,7 +9,7 @@ namespace game_01
 
         public  int[] GetFirstPosibleArraySum(int[] arr, int target)
         {
-            var result = new List<int>();
+            var result = new Dictionary<int, int>();
             if (arr == null || arr.Length < 2)
             {
                 return Array.Empty<int>();
@@ -18,11 +18,11 @@ namespace game_01
             {
                 int firstNumber = arr[i];
                 int secondNumber = target - firstNumber;
-                if(result.Any(x=>x == secondNumber))
+                if(result.TryGetValue(secondNumber, out int index))
                 {
                     return new[] { secondNumber, firstNumber };
                 }
-                result.Add(firstNumber);
+                result[firstNumber] = i;
             }
             return Array.Empty<int>(); ;
         }
